@@ -1,7 +1,7 @@
-class Rutina {
+export class Rutina {
     #activa;
     #diaria;
-    
+
     constructor(id, nombre, color, activa, icono, diaria) {
         this.id = id;
         this.nombre = nombre;
@@ -10,7 +10,7 @@ class Rutina {
         this.icono = icono;
         this.#diaria = diaria;
     }
-    
+
     alternarActivo() {
         this.#activa = !this.#activa;
     }

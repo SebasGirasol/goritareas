@@ -1,4 +1,4 @@
-class actividad{
+class Actividad {
     constructor(id, nombre, icono, activa, id_rutina) {
         this.id = id;
         this.nombre = nombre;

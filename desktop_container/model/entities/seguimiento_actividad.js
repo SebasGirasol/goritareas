@@ -1,5 +1,5 @@
-class seguimiento_actividad {
-    constructor (id, fecha_actividad, completa, hora_inicio, hora_fin, id_actividad) {
+class SeguimientoActividad {
+    constructor(id, fecha_actividad, completa, hora_inicio, hora_fin, id_actividad) {
         this.id = id;
         this.fecha_actividad = fecha_actividad;
         this.#completa = completa;
@@ -15,7 +15,7 @@ class seguimiento_actividad {
         this.#completa = true;
     }
 
-    getCompleta () {
+    getCompleta() {
         return this.#completa;
     }
 }

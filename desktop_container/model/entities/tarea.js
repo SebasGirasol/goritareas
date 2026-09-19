@@ -1,4 +1,4 @@
-class tarea {
+class Tarea {
     constructor(id, nombre, completa, fecha) {
         this.id = id;
         this.nombre = nombre;
@@ -13,7 +13,7 @@ class tarea {
         this.#completa = true;
     }
 
-    getCompleta () {
+    getCompleta() {
         return this.#completa;
     }
 }

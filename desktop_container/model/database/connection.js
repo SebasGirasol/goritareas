@@ -1,8 +1,8 @@
-const Database = require('better-sqlite3');
-const path = require('path');
+import Database from 'better-sqlite3';
+import path from 'path';
 
-const dbPath = path.join(__dirname, 'tareas.db');
+const dbPath = path.join(import.meta.dirname, 'tareas.db');
 
 const db = new Database(dbPath);
 
-module.exports = db;
+export default db;
