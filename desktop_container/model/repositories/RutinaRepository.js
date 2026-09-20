@@ -74,6 +74,19 @@ export default class RutinaRepository {
         return true;
     };
 
+    eliminar(id) {
+        const sentencia = this.db.prepare(`
+            DELETE FROM tabla_rutina
+            WHERE id = ?
+        `);
+
+        sentencia.run(
+            id
+        );
+
+        return true;
+    };
+
     agregarActividadRutina(id_rutina, id_actividad) {
 
         const sentencia = this.db.prepare(`
@@ -103,7 +116,7 @@ export default class RutinaRepository {
         const resultado = sentencia.get(id);
 
         return resultado.existe === 1;
-    }
+    };
 
     //prueba
     #crearEntidad(rutinaBD) {
