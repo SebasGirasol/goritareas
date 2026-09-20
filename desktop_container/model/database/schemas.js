@@ -1,12 +1,13 @@
 export function inicializarBD(db) {
     db.exec(`
     CREATE TABLE IF NOT EXISTS tabla_rutina (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        nombre TEXT NOT NULL,
-        color TEXT NOT NULL,
-        activa INTEGER NOT NULL,
-        icono TEXT NOT NULL,
-        diaria INTEGER NOT NULL)
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nombre TEXT NOT NULL,
+            color TEXT NOT NULL,
+            activa INTEGER NOT NULL,
+            icono TEXT NOT NULL,
+            diaria INTEGER NOT NULL
+        )
     `)
 
     db.exec(`
@@ -14,7 +15,9 @@ export function inicializarBD(db) {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nombre TEXT NOT NULL,
             icono TEXT NOT NULL,
-            activa INTEGER NOT NULL`)
+            activa INTEGER NOT NULL
+        )
+    `)
 
     db.exec(`
         CREATE TABLE IF NOT EXISTS actividad_rutina (
@@ -49,7 +52,8 @@ export function inicializarBD(db) {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nombre TEXT NOT NULL,
             completa INTEGER NOT NULL,
-            fecha TEXT)`
+            fecha TEXT
+        )`
     )
 
     return db

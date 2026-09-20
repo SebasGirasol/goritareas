@@ -9,7 +9,7 @@ app.whenReady().then(() => {
   inicializarBD(db);
   const rutinaRepository = new RutinaRepository(db);
 
-  console.log(rutinaRepository.eliminar(1))
+  console.log(rutinaRepository.obtenerTodas())
 
   const win = new BrowserWindow({
     webPreferences: {
