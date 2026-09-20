@@ -44,9 +44,9 @@ export default class RutinaRepository extends Repository {
         sentencia.run(
             rutina.nombre,
             rutina.color,
-            rutina.activa ? 1: 0,
+            rutina.getActiva() ? 1: 0,
             rutina.icono,
-            rutina.diaria ? 1: 0,
+            rutina.getDiaria() ? 1: 0,
             rutina.id
         );
 

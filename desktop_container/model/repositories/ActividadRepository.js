@@ -39,7 +39,7 @@ export default class ActividadRepository extends Repository {
         sentencia.run(
             actividad.nombre,
             actividad.icono,
-            actividad.activa ? 1: 0,
+            actividad.getActiva() ? 1: 0,
             actividad.id
         );
 
