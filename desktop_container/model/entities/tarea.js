@@ -6,13 +6,11 @@ class Tarea {
         this.fecha = fecha;
     }
 
-    completar() {
-        if (this.#completa) {
-            throw new Error("La tarea ya se completo");
-        }
-        this.#completa = true;
+    alternanCompletar() {
+        this.completa = !this.completa;
+        return this.completa;
     }
-
+    
     getCompleta() {
         return this.#completa;
     }
