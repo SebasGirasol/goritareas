@@ -87,6 +87,7 @@ export default class RutinaRepository {
         return true;
     };
 
+    //Prueba
     agregarActividadRutina(id_rutina, id_actividad) {
 
         const sentencia = this.db.prepare(`
