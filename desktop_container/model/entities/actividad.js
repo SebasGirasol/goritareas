@@ -4,7 +4,6 @@ class Actividad {
         this.nombre = nombre;
         this.icono = icono;
         this.#activa = activa;
-        this.id_rutina = id_rutina;
     }
 
     alternarActivo() {

@@ -14,9 +14,7 @@ export function inicializarBD(db) {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nombre TEXT NOT NULL,
             icono TEXT NOT NULL,
-            activa INTEGER NOT NULL,
-            id_rutina INTEGER NOT NULL,
-            FOREIGN KEY(id_rutina) REFERENCES tabla_rutina(id))`)
+            activa INTEGER NOT NULL`)
 
     db.exec(`
         CREATE TABLE IF NOT EXISTS actividad_rutina (
