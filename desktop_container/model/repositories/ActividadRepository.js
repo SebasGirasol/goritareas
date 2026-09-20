@@ -43,7 +43,7 @@ export default class ActividadRepository extends Repository {
             actividad.id
         );
 
-        return true;
+        return resultado.changes > 0;
     };
 
 }
