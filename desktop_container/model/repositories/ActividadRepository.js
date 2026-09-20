@@ -1,12 +1,15 @@
-export default class ActividadRepository {
+import Repository from "./Repository.js";
+
+export default class ActividadRepository extends Repository {
 
     constructor(db) {
+        super("tabla_actividad")
         this.db = db;
     }
 
     crear(actividad) {
         const sentencia = this.db.prepare(`
-            INSERT INTO tabla_actividad
+            INSERT INTO ${this.tabla}
                 (nombre, icono, activa)
             VALUES
                 (?, ?, ?)
@@ -23,27 +26,24 @@ export default class ActividadRepository {
         return actividad;
     };
 
-    obtenerTodas() {
+    actualizar(actividad) {
         const sentencia = this.db.prepare(`
-            SELECT * FROM tabla_actividad
-        `);
-
-        return sentencia.all()
-    };
-
-    buscarPorID(id) {
-        const sentencia = this.db.prepare(`
-            SELECT * FROM tabla_actividad
+            UPDATE ${this.tabla}
+            SET
+                nombre = ?,
+                icono = ?,
+                activa = ?
             WHERE id = ?
         `);
 
-        const actividad = sentencia.get(id);
+        sentencia.run(
+            actividad.nombre,
+            actividad.icono,
+            actividad.activa ? 1: 0,
+            actividad.id
+        );
 
-        if (!actividad) {
-            return null;
-        }
-
-        return actividad
+        return true;
     };
-    
+
 }

@@ -5,3 +5,10 @@ export const rutina = {
     "icono": "auisha",
     "diaria": true
 }
+
+export const actividad = {
+    "id": 2,
+    "nombre": "Saltar",
+    "icono": "auisha",
+    "activa": true
+}

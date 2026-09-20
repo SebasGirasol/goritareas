@@ -1,4 +1,4 @@
-class Repository {
+export default class Repository {
 
     constructor(tabla) {
         this.tabla = tabla;
