@@ -50,38 +50,7 @@ export default class RutinaRepository extends Repository {
             rutina.id
         );
 
-        return true;
+        return resultado.changes > 0;
     };
 
-    //Prueba
-    agregarActividadRutina(id_rutina, id_actividad) {
-
-        const sentencia = this.db.prepare(`
-            INSERT INTO actividad_rutina
-                (id_rutina, id_actividad)
-            VALUES
-                (?, ?)
-        `);
-
-        const resultado = sentencia.run(
-            id_rutina,
-            id_actividad
-        );
-
-        return true;
-    };
-
-    //prueba
-    #crearEntidad(rutinaBD) {
-        const rutina = new Rutina(
-            rutinaBD.id,
-            rutinaBD.nombre,
-            rutinaBD.color,
-            !!rutinaBD.activa,
-            rutinaBD.icono,
-            !!rutinaBD.diaria
-        );
-
-        return rutina;
-    };
 }
