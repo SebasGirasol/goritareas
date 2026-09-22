@@ -11,7 +11,7 @@ app.whenReady().then(() => {
   const rutinaRepository = new RutinaRepository(db);
   const rutinaService = new RutinaService(rutinaRepository);
 
-  console.log(rutinaService.crearRutina(rutina))
+  console.log(rutinaService.actualizarRutina(rutina))
 
   const win = new BrowserWindow({
     webPreferences: {

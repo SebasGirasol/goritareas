@@ -41,7 +41,7 @@ export default class RutinaRepository extends Repository {
             WHERE id = ?
         `);
 
-        sentencia.run(
+        const resultado = sentencia.run(
             rutina.nombre,
             rutina.color,
             rutina.getActiva() ? 1: 0,

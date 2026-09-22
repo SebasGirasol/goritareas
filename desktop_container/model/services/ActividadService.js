@@ -24,11 +24,43 @@ export default class RutinaService {
 
         try {
             const resupuesta = this.repository.crear(rutina);
-            
+
             return Resultado.ok("Se creó con éxito la rutina", resupuesta);
 
         } catch (error) {
             return Resultado.error("Ocurrió un error al guardar el registro " + error);
+        }
+    }
+
+    actualizarRutina(data) {
+
+        const rutina = this.#convertirRutina(data);
+
+        const validacion = validarRutina(rutina);
+
+        if (!validacion.status) {
+            console.log("error")
+            return validacion;
+        }
+
+        try {
+
+            const validarExiste = this.repository.validarExiste(rutina.id);
+
+            if(!validarExiste) {
+                return Resultado.error("No existe la rutina con el id mencionado");
+            }
+
+            const resupuesta = this.repository.actualizar(rutina);
+
+            if(!resupuesta) {
+                return Resultado.error("No se actualizo el registro");
+            }
+
+            return Resultado.ok("Rutina actualizada con exito");
+
+        } catch (error) {
+            return Resultado.error("Ocurrio un error a la hora de actualizar el registro: " + error);
         }
     }
 
@@ -39,7 +71,7 @@ export default class RutinaService {
             );
         }
 
-        return true;
+        return Resultado.ok("ID ok");
     }
 
     #convertirRutina(data) {

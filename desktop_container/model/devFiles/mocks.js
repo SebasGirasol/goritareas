@@ -1,8 +1,8 @@
 export const rutina = {
-    "id": 1,
-    "nombre": "adios",
-    "color": "#000000",
-    "icono": "auisha",
+    "id": 2,
+    "nombre": "Estudiar",
+    "color": "#FFFFFF",
+    "icono": "icnono1233",
     "diaria": true
 }
 
