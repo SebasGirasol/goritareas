@@ -13,7 +13,7 @@ app.whenReady().then(() => {
   const repositoryRutinaActividad = new ActividadRutinaRepository(db);
   const rutinaService = new RutinaService(rutinaRepository, repositoryRutinaActividad);
 
-  console.log(rutinaService.eliminarRutina(3))
+  console.log(rutinaService.obtenerTodasRutina())
 
   const win = new BrowserWindow({
     webPreferences: {

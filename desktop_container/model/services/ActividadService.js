@@ -14,6 +14,25 @@ export default class RutinaService {
         this.repositoryRelacion = repositoryRelacion;
     }
 
+    obtenerTodasRutina() {
+        try {
+            const rutinasBD = this.repository.obtenerTodas();
+
+            let rutinas = [];
+
+            for(let rutina of rutinasBD) {
+                let rutinaConvertida = this.#convertirRutina(rutina)
+                rutinas.push(rutinaConvertida);
+            }
+
+            return Resultado.ok("Rutinas obtenidas", rutinas);
+
+        } catch(error) {
+            return Resultado.error("Ocurrio un error al obtener las rutinas: " + error);
+        }
+        
+    }
+
     crearRutina(data) {
 
         const rutina = this.#convertirRutina(data);
