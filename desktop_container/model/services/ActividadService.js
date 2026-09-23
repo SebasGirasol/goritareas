@@ -1,4 +1,5 @@
 import { Rutina } from '../entities/rutina.js';
+import ActividadRutinaRepository from '../repositories/ActividadRutinaRepository.js';
 import RutinaRepository from '../repositories/RutinaRepository.js'
 import Resultado from './Resultados.js';
 import validarRutina from './validaciones/validarRutina.js';
@@ -6,9 +7,11 @@ import validarRutina from './validaciones/validarRutina.js';
 export default class RutinaService {
     /**
      * @param {RutinaRepository} repository
+     * @param {ActividadRutinaRepository} repositoryRelacion 
      */
-    constructor(repository) {
+    constructor(repository, repositoryRelacion) {
         this.repository = repository;
+        this.repositoryRelacion = repositoryRelacion;
     }
 
     crearRutina(data) {
@@ -95,10 +98,43 @@ export default class RutinaService {
                 return Resultado.error("No se actualizo una version de la rutina");
             }
 
-            return Resultado.ok("Se creo la nueva versión de la rutina", rutinaCreada)
+            return Resultado.ok("Se creo la nueva versión de la rutina", rutinaCreada);
 
         } catch (error) {
             return Resultado.error("Ocurrio un error a la hora de cambiar la versión: " + error);
+        }
+    }
+
+    eliminarRutina(id) {
+        const resultado = this.#validarID(id);
+
+        if(!resultado.status) {
+            return resultado;
+        }
+
+        try {
+            const validarExiste = this.repository.validarExiste(id);
+
+            if(!validarExiste) {
+                return Resultado.error("No existe la rutina con el id mencionado");
+            }
+
+            const validarTieneActividades = this.repositoryRelacion.tieneActividadesRelacionadas(id);
+
+            if(validarTieneActividades) {
+                return Resultado.error("La rutina tiene actividades relacionadas, no es posible eliminarla");
+            }
+
+            const resultadoEliminacion = this.repository.eliminar(id);
+
+            if(!resultadoEliminacion) {
+                return Resultado.error("Ocurrio un error al realizar la eliminación");
+            }
+
+            return Resultado.ok("Se elimino con exito la rutina")
+
+        } catch(error) {
+
         }
     }
 

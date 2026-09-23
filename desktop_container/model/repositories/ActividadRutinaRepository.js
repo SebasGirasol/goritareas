@@ -1,6 +1,6 @@
 export default class ActividadRutinaRepository {
     constructor(db) {
-        super("actividad_rutina")
+        this.tabla = "actividad_rutina";
         this.db = db;
     }
 
@@ -10,6 +10,20 @@ export default class ActividadRutinaRepository {
         `);
 
         return sentencia.all();
+    }
+
+    tieneActividadesRelacionadas(id) {
+        const sentencia = this.db.prepare(`
+            SELECT EXISTS (
+                SELECT 1
+                FROM ${this.tabla}
+                WHERE id_rutina = ?
+            ) AS tiene_actividad
+        `);
+
+        const resultado = sentencia.get(id);
+
+        return resultado.tiene_actividad === 1;
     }
 
     asignar (id_rutina, id_actividad) {
