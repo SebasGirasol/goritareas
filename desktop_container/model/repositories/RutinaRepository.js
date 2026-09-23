@@ -11,9 +11,9 @@ export default class RutinaRepository extends Repository {
     crear(rutina) {
         const sentencia = this.db.prepare(`
             INSERT INTO ${this.tabla}
-                (nombre, color, activa, icono, diaria)
+                (nombre, color, activa, icono, diaria, id_primera_version)
             VALUES
-                (?, ?, ?, ?, ?)
+                (?, ?, ?, ?, ?, ?)
         `);
 
         const resultado = sentencia.run(
@@ -21,7 +21,8 @@ export default class RutinaRepository extends Repository {
             rutina.color,
             1,
             rutina.icono,
-            rutina.getDiaria() ? 1 : 0
+            rutina.getDiaria() ? 1 : 0,
+            rutina.id_primera_version
         );
 
         rutina.id = resultado.lastInsertRowid;
@@ -37,7 +38,8 @@ export default class RutinaRepository extends Repository {
                 color = ?,
                 activa = ?,
                 icono = ?,
-                diaria = ?
+                diaria = ?,
+                id_primera_version = ?
             WHERE id = ?
         `);
 
@@ -47,6 +49,7 @@ export default class RutinaRepository extends Repository {
             rutina.getActiva() ? 1: 0,
             rutina.icono,
             rutina.getDiaria() ? 1: 0,
+            rutina.id_primera_version,
             rutina.id
         );
 

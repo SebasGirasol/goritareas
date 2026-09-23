@@ -6,7 +6,8 @@ export function inicializarBD(db) {
             color TEXT NOT NULL,
             activa INTEGER NOT NULL,
             icono TEXT NOT NULL,
-            diaria INTEGER NOT NULL
+            diaria INTEGER NOT NULL,
+            id_primera_version INTEGER
         )
     `)
 

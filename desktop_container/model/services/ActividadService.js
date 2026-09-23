@@ -80,6 +80,10 @@ export default class RutinaService {
                 return Resultado.error("No existe la rutina con el id mencionado");
             }
 
+            if(rutina.id_primera_version == null) {
+                rutina.id_primera_version = rutina.id
+            }
+
             const rutinaCreada = this.repository.crear(rutina);
 
             rutina.activa = false;
