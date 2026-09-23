@@ -1,9 +1,10 @@
 export const rutina = {
-    "id": 2,
-    "nombre": "Estudiar",
-    "color": "#FFFFFF",
+    "id": 4,
+    "nombre": "Estudiar Algebra",
+    "color": "#2ff2",
     "icono": "icnono1233",
-    "diaria": true
+    "diaria": true,
+    "activa": true
 }
 
 export const actividad = {

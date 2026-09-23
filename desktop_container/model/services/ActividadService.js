@@ -39,7 +39,6 @@ export default class RutinaService {
         const validacion = validarRutina(rutina);
 
         if (!validacion.status) {
-            console.log("error")
             return validacion;
         }
 
@@ -61,6 +60,41 @@ export default class RutinaService {
 
         } catch (error) {
             return Resultado.error("Ocurrio un error a la hora de actualizar el registro: " + error);
+        }
+    }
+
+    nuevaVersion(data) {
+
+        const rutina = this.#convertirRutina(data);
+
+        const validacion = validarRutina(rutina);
+
+        if (!validacion.status) {
+            return validacion;
+        }
+
+        try {
+            const validarExiste = this.repository.validarExiste(rutina.id);
+
+            if(!validarExiste) {
+                return Resultado.error("No existe la rutina con el id mencionado");
+            }
+
+            const rutinaCreada = this.repository.crear(rutina);
+
+            rutina.activa = false;
+
+            const respuestaActualización = this.repository.actualizar(rutina);
+
+            if(!respuestaActualización) {
+                this.repository.eliminar(rutinaCreada.id);
+                return Resultado.error("No se actualizo una version de la rutina");
+            }
+
+            return Resultado.ok("Se creo la nueva versión de la rutina", rutinaCreada)
+
+        } catch (error) {
+            return Resultado.error("Ocurrio un error a la hora de cambiar la versión: " + error);
         }
     }
 
