@@ -157,6 +157,21 @@ export default class RutinaService {
         }
     }
 
+    asignarTarea(id_rutina, id_tarea) {
+        try {
+            const resultado = this.repositoryRelacion.asignar(id_rutina, id_tarea);
+
+            if(!resultado) {
+                return Resultado.error("Ocurrio un error al hacer la relacion")
+            }
+
+            return Resultado.ok("Se ha asignado la tarea a la rutina")
+
+        } catch(error) {
+            return Resultado.error("Ocurrio un error al intentar realizar el registo: " + error)
+        }
+    }
+
     #validarID(rutina) {
         if (!rutina.id) {
             Resultado.error(
