@@ -1,9 +1,12 @@
 class Actividad {
-    constructor(id, nombre, icono, activa, id_rutina) {
-        this.id = id;
-        this.nombre = nombre;
-        this.icono = icono;
-        this.#activa = activa;
+
+    static nombre = "actividad";
+
+    constructor(data) {
+        this.id = data.id;
+        this.nombre = data.nombre;
+        this.icono = data.icono;
+        this.#activa = data.activa;
     }
 
     alternarActivo() {
@@ -12,5 +15,9 @@ class Actividad {
 
     getActiva() {
         return this.#activa
+    }
+
+    obtenerNombreEntidad() {
+        return "actividad"
     }
 }

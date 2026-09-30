@@ -1,15 +1,18 @@
 export class Rutina {
+    
     #activa;
     #diaria;
 
-    constructor(id, nombre, color, activa, icono, diaria, id_primera_version) {
-        this.id = id;
-        this.nombre = nombre;
-        this.color = color;
-        this.#activa = activa;
-        this.icono = icono;
-        this.#diaria = diaria;
-        this.id_primera_version = id_primera_version;
+    static nombre = "rutina";
+
+    constructor(data) {
+        this.id = data.id;
+        this.nombre = data.nombre;
+        this.color = data.color;
+        this.#activa = data.activa;
+        this.icono = data.icono;
+        this.#diaria = data.diaria;
+        this.id_primera_version = data.id_primera_version;
     }
 
     alternarActivo() {
@@ -26,5 +29,9 @@ export class Rutina {
 
     getDiaria() {
         return this.#diaria
+    }
+
+    obtenerNombreEntidad() {
+        return "rutina"
     }
 }

@@ -4,28 +4,27 @@ import RutinaRepository from '../repositories/RutinaRepository.js'
 import Resultado from './Resultados.js';
 import validarRutina from './validaciones/validarRutina.js';
 
-export default class RutinaService {
-    /**
-     * @param {RutinaRepository} repository
-     * @param {ActividadRutinaRepository} repositoryRelacion 
-     */
-    constructor(repository, repositoryRelacion) {
+export default class Service {
+
+    constructor(Entidad, repository, repositoryRelacion, validaciones) {
+        this.Entidad = Entidad;
         this.repository = repository;
         this.repositoryRelacion = repositoryRelacion;
+        this.validacion = validaciones;
     }
 
-    obtenerTodasRutina() {
+    obtenerTodas() {
         try {
-            const rutinasBD = this.repository.obtenerTodas();
+            const datos = this.repository.obtenerTodas();
 
-            let rutinas = [];
+            let entidades = [];
 
-            for(let rutina of rutinasBD) {
-                let rutinaConvertida = this.#convertirRutina(rutina)
-                rutinas.push(rutinaConvertida);
+            for(let entidad of datos) {
+                let entidadConvertida = new this.Entidad(entidad);
+                entidades.push(entidadConvertida);
             }
 
-            return Resultado.ok("Rutinas obtenidas", rutinas);
+            return Resultado.ok(`${this.Entidad.nombre}s obtenidas`, entidades);
 
         } catch(error) {
             return Resultado.error("Ocurrio un error al obtener las rutinas: " + error);
@@ -33,11 +32,11 @@ export default class RutinaService {
         
     }
 
-    crearRutina(data) {
+    crear(data) {
 
-        const rutina = this.#convertirRutina(data);
+        const entidad = new this.Entidad(data)
 
-        const validacion = validarRutina(rutina);
+        const validacion = this.validacion(entidad);
 
         if (!validacion.status) {
             console.log("error")
@@ -45,20 +44,20 @@ export default class RutinaService {
         }
 
         try {
-            const resupuesta = this.repository.crear(rutina);
+            const resupuesta = this.repository.crear(entidad);
 
-            return Resultado.ok("Se creó con éxito la rutina", resupuesta);
+            return Resultado.ok(`Se creó con éxito la ${this.Entidad.nombre}`, resupuesta);
 
         } catch (error) {
             return Resultado.error("Ocurrió un error al guardar el registro " + error);
         }
     }
 
-    actualizarRutina(data) {
+    actualizar(data) {
 
-        const rutina = this.#convertirRutina(data);
+        const entidad = new this.Entidad(data)
 
-        const validacion = validarRutina(rutina);
+        const validacion = this.validacion(entidad);
 
         if (!validacion.status) {
             return validacion;
@@ -66,19 +65,19 @@ export default class RutinaService {
 
         try {
 
-            const validarExiste = this.repository.validarExiste(rutina.id);
+            const validarExiste = this.repository.validarExiste(entidad.id);
 
             if(!validarExiste) {
                 return Resultado.error("No existe la rutina con el id mencionado");
             }
 
-            const resupuesta = this.repository.actualizar(rutina);
+            const resupuesta = this.repository.actualizar(entidad);
 
             if(!resupuesta) {
                 return Resultado.error("No se actualizo el registro");
             }
 
-            return Resultado.ok("Rutina actualizada con exito");
+            return Resultado.ok(`${this.Entidad.nombre} actualizada con exito"`);
 
         } catch (error) {
             return Resultado.error("Ocurrio un error a la hora de actualizar el registro: " + error);
@@ -87,44 +86,44 @@ export default class RutinaService {
 
     nuevaVersion(data) {
 
-        const rutina = this.#convertirRutina(data);
+        const entidad = new this.Entidad(data)
 
-        const validacion = validarRutina(rutina);
+        const validacion = this.validacion(entidad);
 
         if (!validacion.status) {
             return validacion;
         }
 
         try {
-            const validarExiste = this.repository.validarExiste(rutina.id);
+            const validarExiste = this.repository.validarExiste(entidad.id);
 
             if(!validarExiste) {
-                return Resultado.error("No existe la rutina con el id mencionado");
+                return Resultado.error(`No existe la ${this.Entidad.nombre} con el id mencionado`);
             }
 
-            if(rutina.id_primera_version == null) {
-                rutina.id_primera_version = rutina.id
+            if(entidad.id_primera_version == null) {
+                entidad.id_primera_version = entidad.id
             }
 
-            const rutinaCreada = this.repository.crear(rutina);
+            const entidadCreada = this.repository.crear(entidad);
 
-            rutina.activa = false;
+            entidad.alternarActivo();
 
-            const respuestaActualización = this.repository.actualizar(rutina);
+            const respuestaActualización = this.repository.actualizar(entidad);
 
             if(!respuestaActualización) {
-                this.repository.eliminar(rutinaCreada.id);
-                return Resultado.error("No se actualizo una version de la rutina");
+                this.repository.eliminar(entidadCreada.id);
+                return Resultado.error(`No se actualizo una version de la ${this.Entidad.nombre}`);
             }
 
-            return Resultado.ok("Se creo la nueva versión de la rutina", rutinaCreada);
+            return Resultado.ok(`Se creo la nueva versión de la ${this.Entidad.nombre}`, entidadCreada);
 
         } catch (error) {
             return Resultado.error("Ocurrio un error a la hora de cambiar la versión: " + error);
         }
     }
 
-    eliminarRutina(id) {
+    eliminar(id) {
         const resultado = this.#validarID(id);
 
         if(!resultado.status) {
@@ -135,13 +134,13 @@ export default class RutinaService {
             const validarExiste = this.repository.validarExiste(id);
 
             if(!validarExiste) {
-                return Resultado.error("No existe la rutina con el id mencionado");
+                return Resultado.error(`No existe la ${this.Entidad.nombre} con el id mencionado`);
             }
 
             const validarTieneActividades = this.repositoryRelacion.tieneActividadesRelacionadas(id);
 
             if(validarTieneActividades) {
-                return Resultado.error("La rutina tiene actividades relacionadas, no es posible eliminarla");
+                return Resultado.error(`La ${this.Entidad.nombre} tiene relaciones, no es posible eliminarla`);
             }
 
             const resultadoEliminacion = this.repository.eliminar(id);
@@ -157,7 +156,7 @@ export default class RutinaService {
         }
     }
 
-    asignarTarea(id_rutina, id_tarea) {
+    asignar(id_rutina, id_tarea) {
         try {
             const resultado = this.repositoryRelacion.asignar(id_rutina, id_tarea);
 
@@ -180,16 +179,5 @@ export default class RutinaService {
         }
 
         return Resultado.ok("ID ok");
-    }
-
-    #convertirRutina(data) {
-        return new Rutina(
-            data.id,
-            data.nombre,
-            data.color,
-            data.activa,
-            data.icono,
-            data.diaria
-        );
     }
 }

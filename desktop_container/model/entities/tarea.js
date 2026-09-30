@@ -1,9 +1,12 @@
 class Tarea {
-    constructor(id, nombre, completa, fecha) {
-        this.id = id;
-        this.nombre = nombre;
-        this.#completa = completa;
-        this.fecha = fecha;
+
+    static nombre = "tarea";
+
+    constructor(data) {
+        this.id = data.id;
+        this.nombre = data.nombre;
+        this.#completa = data.completa;
+        this.fecha = data.fecha;
     }
 
     alternanCompletar() {
@@ -14,4 +17,5 @@ class Tarea {
     getCompleta() {
         return this.#completa;
     }
+
 }

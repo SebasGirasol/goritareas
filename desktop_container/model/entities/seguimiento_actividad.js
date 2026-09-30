@@ -1,12 +1,15 @@
 class SeguimientoActividad {
-    constructor(id, fecha_actividad, completa, hora_inicio, hora_fin, id_rutina, id_actividad) {
-        this.id = id;
-        this.fecha_actividad = fecha_actividad;
-        this.#completa = completa;
-        this.hora_inicio = hora_inicio;
-        this.hora_fin = hora_fin;
-        this.id_rutina= id_rutina;
-        this.id_actividad = id_actividad;
+
+    static nombre = "seguimiento actividad";
+
+    constructor(data) {
+        this.id = data.id;
+        this.fecha_actividad = data.fecha_actividad;
+        this.#completa = data.completa;
+        this.hora_inicio = data.hora_inicio;
+        this.hora_fin = data.hora_fin;
+        this.id_rutina = data.id_rutina;
+        this.id_actividad = data.id_actividad;
     }
 
     alternanCompletar() {
