@@ -1,11 +1,11 @@
 export const rutina = {
-    "id": 6,
-    "nombre": "Vender marihuana",
+    "id": 19,
+    "nombre": "Aguacate",
     "color": "#2ff2",
     "icono": "icnono1233",
     "diaria": true,
     "activa": true,
-    "id_primera_version": 4
+    "id_primera_version": null
 }
 
 export const actividad = {

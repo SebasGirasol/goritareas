@@ -7,13 +7,14 @@ import ActividadRutinaRepository from "./model/repositories/ActividadRutinaRepos
 import Service from "./model/services/Service.js";
 import { Rutina } from "./model/entities/rutina.js";
 import validarRutina from "./model/services/validaciones/validarRutina.js";
+import ServiceRelacional from "./model/services/ServicerRelacional.js";
 
 app.whenReady().then(() => {
 
   inicializarBD(db);
   const rutinaRepository = new RutinaRepository(db);
   const repositoryRutinaActividad = new ActividadRutinaRepository(db);
-  const rutinaService = new Service(Rutina, rutinaRepository, repositoryRutinaActividad, validarRutina)
+  const rutinaService = new ServiceRelacional(Rutina, rutinaRepository, repositoryRutinaActividad, validarRutina)
 
   console.log(rutinaService.nuevaVersion(rutina))
 
