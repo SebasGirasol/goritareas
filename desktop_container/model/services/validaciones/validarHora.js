@@ -2,12 +2,6 @@ import Resultado from "../Resultados.js";
 
 export default function validarHora(hora) {
 
-    if (!color) {
-        return Resultado.error(
-            "El campo hora es obligatorio"
-        );
-    }
-
     const validacionHex = /^(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d$/;
 
     if (!validacionHex.test(hora)) {
