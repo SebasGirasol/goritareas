@@ -2,6 +2,10 @@ import Resultado from "../Resultados.js";
 
 export default function validarHora(hora) {
 
+    if(!hora) {
+        return Resultado.ok("Hora ok")
+    }
+
     const validacionHex = /^(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d$/;
 
     if (!validacionHex.test(hora)) {
