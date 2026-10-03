@@ -15,41 +15,50 @@ import SeguimientoActividadRepository from "./repositories/SeguimientoActividadR
 import validarSeguimientoActividad from "./services/validaciones/validarSeguimientoActividad.js";
 
 
-export function crearDependenciasRutina(db) {
+export function crearDependencias(db) {
 
     const rutinaRepository = new RutinaRepository(db);
-    const actividadRutinaRepository = new ActividadRutinaRepository(db);
-    const rutinaService = new ServiceRelacional(Rutina, rutinaRepository, actividadRutinaRepository, validarRutina);
-
-    return {
-        rutinaService
-    }
-}
-
-export function crearDependenciasActividad(db) {
     const actividadRepository = new ActividadRepository(db);
     const actividadRutinaRepository = new ActividadRutinaRepository(db);
-    const actividadService = new ServiceRelacional(Actividad, actividadRepository, actividadRutinaRepository, validarActividad);
-
-    return {
-        actividadService
-    }
-}
-
-export function crearDependenciasTarea(db) {
     const tareaRepository = new TareaRepository(db);
-    const tareaService = new Service(Tarea, tareaRepository, validarTarea);
-
-    return {
-        tareaService
-    }
-}
-
-export function crearDependenciasSeguimiento(db) {
     const seguimientoRepository = new SeguimientoActividadRepository(db);
-    const seguimientoService = new Service(SeguimientoActividad, seguimientoRepository, validarSeguimientoActividad);
+
+
+    const rutinaService =
+        new ServiceRelacional(
+            Rutina,
+            rutinaRepository,
+            actividadRutinaRepository,
+            validarRutina
+        );
+
+    const actividadService =
+        new ServiceRelacional(
+            Actividad,
+            actividadRepository,
+            actividadRutinaRepository,
+            validarActividad
+        );
+
+    const tareaService =
+        new Service(
+            Tarea,
+            tareaRepository,
+            validarTarea
+        );
+
+    const seguimientoService =
+        new Service(
+            SeguimientoActividad,
+            seguimientoRepository,
+            validarSeguimientoActividad
+        );
+
 
     return {
-        tareaService
-    }
+        rutinaService,
+        actividadService,
+        tareaService,
+        seguimientoService
+    };
 }
