@@ -1,29 +1,19 @@
 import { app, BrowserWindow, ipcMain } from "electron";
-import db from './model/database/connection.js'
-import { inicializarBD } from "./model/database/schemas.js";
-import RutinaRepository from "./model/repositories/RutinaRepository.js";
-import { rutina } from "./model/devFiles/mocks.js";
-import ActividadRutinaRepository from "./model/repositories/ActividadRutinaRepository.js";
-import Service from "./model/services/Service.js";
-import { Rutina } from "./model/entities/rutina.js";
-import validarRutina from "./model/services/validaciones/validarRutina.js";
-import ServiceRelacional from "./model/services/ServicerRelacional.js";
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.whenReady().then(() => {
-
-  inicializarBD(db);
-  const rutinaRepository = new RutinaRepository(db);
-  const repositoryRutinaActividad = new ActividadRutinaRepository(db);
-  const rutinaService = new ServiceRelacional(Rutina, rutinaRepository, repositoryRutinaActividad, validarRutina)
-
-  console.log(rutinaService.nuevaVersion(rutina))
 
   const win = new BrowserWindow({
     webPreferences: {
       contextIsolation: true,
-      nodeIntegration: false
+      nodeIntegration: false,
+      preload: path.join(__dirname, 'controller', 'preload', 'preload.js')
     }
   });
 
-  win.loadFile("index.html");
+  win.loadURL('http://localhost:5173');
 });
