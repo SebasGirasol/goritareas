@@ -5,7 +5,7 @@ export class Tarea {
     constructor(data) {
         this.id = data.id;
         this.nombre = data.nombre;
-        this.#completa = data.completa;
+        this.completa = data.completa;
         this.fecha = data.fecha;
     }
 
@@ -15,7 +15,7 @@ export class Tarea {
     }
     
     getCompleta() {
-        return this.#completa;
+        return this.completa;
     }
 
 }

@@ -5,7 +5,7 @@ export class SeguimientoActividad {
     constructor(data) {
         this.id = data.id;
         this.fecha_actividad = data.fecha_actividad;
-        this.#completa = data.completa;
+        this.completa = data.completa;
         this.hora_inicio = data.hora_inicio;
         this.hora_fin = data.hora_fin;
         this.id_rutina = data.id_rutina;
@@ -18,6 +18,6 @@ export class SeguimientoActividad {
     }
 
     getCompleta() {
-        return this.#completa;
+        return this.completa;
     }
 }

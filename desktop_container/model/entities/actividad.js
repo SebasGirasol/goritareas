@@ -6,15 +6,15 @@ export class Actividad {
         this.id = data.id;
         this.nombre = data.nombre;
         this.icono = data.icono;
-        this.#activa = data.activa;
+        this.activa = data.activa;
     }
 
     alternarActivo() {
-        this.#activa = !this.#activa;
+        this.activa = !this.activa;
     }
 
     getActiva() {
-        return this.#activa
+        return this.activa
     }
 
     obtenerNombreEntidad() {
