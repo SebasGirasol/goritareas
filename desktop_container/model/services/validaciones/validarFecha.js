@@ -2,14 +2,13 @@ import Resultado from "../Resultados.js";
 
 export default function validarFecha(fecha, requerido) {
 
-    if(!requerido) {
-        return Resultado.ok("fecha ok")
-    }
-
     if (!fecha) {
-        return Resultado.error(
-            "El campo fecha es obligatorio"
-        );
+        if (requerido) {
+            return Resultado.error(
+                "Valor fecha requerido"
+            );
+        }
+        return Resultado.ok("fecha ok");
     }
 
     if (typeof fecha !== "string") {
