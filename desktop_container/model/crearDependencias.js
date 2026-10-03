@@ -1,18 +1,18 @@
-import { Rutina } from "../model/entities/rutina.js";
-import { Actividad } from "../model/entities/actividad.js";
-import { Tarea } from "../model/entities/tarea.js";
-import { SeguimientoActividad } from "../model/entities/seguimiento_actividad.js";
-import ActividadRepository from "../model/repositories/ActividadRepository.js";
-import ActividadRutinaRepository from "../model/repositories/ActividadRutinaRepository.js";
-import RutinaRepository from "../model/repositories/RutinaRepository.js";
-import ServiceRelacional from "../model/services/ServicerRelacional.js";
-import validarActividad from "../model/services/validaciones/validarActividad.js";
-import validarRutina from "../model/services/validaciones/validarRutina.js";
-import TareaRepository from "../model/repositories/TareaRepository.js";
-import Service from "../model/services/Service.js";
-import validarTarea from "../model/services/validaciones/validarTarea.js";
-import SeguimientoActividadRepository from "../model/repositories/SeguimientoActividadRepository.js";
-import validarSeguimientoActividad from "../model/services/validaciones/validarSeguimientoActividad.js";
+import { Rutina } from "./entities/rutina.js";
+import { Actividad } from "./entities/actividad.js";
+import { Tarea } from "./entities/tarea.js";
+import { SeguimientoActividad } from "./entities/seguimiento_actividad.js";
+import ActividadRepository from "./repositories/ActividadRepository.js";
+import ActividadRutinaRepository from "./repositories/ActividadRutinaRepository.js";
+import RutinaRepository from "./repositories/RutinaRepository.js";
+import ServiceRelacional from "./services/ServicerRelacional.js";
+import validarActividad from "./services/validaciones/validarActividad.js";
+import validarRutina from "./services/validaciones/validarRutina.js";
+import TareaRepository from "./repositories/TareaRepository.js";
+import Service from "./services/Service.js";
+import validarTarea from "./services/validaciones/validarTarea.js";
+import SeguimientoActividadRepository from "./repositories/SeguimientoActividadRepository.js";
+import validarSeguimientoActividad from "./services/validaciones/validarSeguimientoActividad.js";
 
 
 export function crearDependenciasRutina(db) {
