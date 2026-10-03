@@ -47,7 +47,7 @@ export function crearDependenciasTarea(db) {
 
 export function crearDependenciasSeguimiento(db) {
     const seguimientoRepository = new SeguimientoActividadRepository(db);
-    const tareaService = new Service(SeguimientoActividad, seguimientoRepository, validarSeguimientoActividad);
+    const seguimientoService = new Service(SeguimientoActividad, seguimientoRepository, validarSeguimientoActividad);
 
     return {
         tareaService
