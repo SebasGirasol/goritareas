@@ -34,7 +34,6 @@ export default class Service {
         const validacion = this.validacion(entidad);
 
         if (!validacion.status) {
-            console.log("error")
             return validacion;
         }
 
