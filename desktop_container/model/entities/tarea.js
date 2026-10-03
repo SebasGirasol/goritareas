@@ -1,4 +1,4 @@
-class Tarea {
+export class Tarea {
 
     static nombre = "tarea";
 

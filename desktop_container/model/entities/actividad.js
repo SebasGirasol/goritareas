@@ -1,4 +1,4 @@
-class Actividad {
+export class Actividad {
 
     static nombre = "actividad";
 
