@@ -7,9 +7,7 @@ function App() {
         try {
 
             const resultado =
-                await window.api.rutina.crear({
-                    nombre: "Rutina de prueba"
-                });
+                await window.api.rutina.obtenerTodas()
 
             console.log("React: resultado", resultado);
 

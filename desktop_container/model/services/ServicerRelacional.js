@@ -3,8 +3,8 @@ import Resultado from './Resultados.js';
 
 export default class ServiceRelacional extends Service {
 
-    constructor(Entidad, repository, repositoryRelacion, validaciones) {
-        super(Entidad, repository, validaciones);
+    constructor(Entidad, repository, repositoryRelacion, validaciones, conversion) {
+        super(Entidad, repository, validaciones, conversion);
         this.repositoryRelacion = repositoryRelacion;
     }
 

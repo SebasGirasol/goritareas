@@ -13,6 +13,7 @@ import Service from "./services/Service.js";
 import validarTarea from "./services/validaciones/validarTarea.js";
 import SeguimientoActividadRepository from "./repositories/SeguimientoActividadRepository.js";
 import validarSeguimientoActividad from "./services/validaciones/validarSeguimientoActividad.js";
+import { convertirActividad, convertirRutina, convertirSeguimiento, convertirTarea } from "./services/conversiones/conversiones.js";
 
 
 export function crearDependencias(db) {
@@ -29,7 +30,8 @@ export function crearDependencias(db) {
             Rutina,
             rutinaRepository,
             actividadRutinaRepository,
-            validarRutina
+            validarRutina,
+            convertirRutina
         );
 
     const actividadService =
@@ -37,21 +39,24 @@ export function crearDependencias(db) {
             Actividad,
             actividadRepository,
             actividadRutinaRepository,
-            validarActividad
+            validarActividad,
+            convertirActividad
         );
 
     const tareaService =
         new Service(
             Tarea,
             tareaRepository,
-            validarTarea
+            validarTarea,
+            convertirTarea
         );
 
     const seguimientoService =
         new Service(
             SeguimientoActividad,
             seguimientoRepository,
-            validarSeguimientoActividad
+            validarSeguimientoActividad,
+            convertirSeguimiento
         );
 
 

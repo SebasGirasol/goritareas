@@ -2,21 +2,22 @@ import Resultado from './Resultados.js';
 
 export default class Service {
 
-    constructor(Entidad, repository, validaciones) {
+    constructor(Entidad, repository, validaciones, conversion) {
         this.Entidad = Entidad;
         this.repository = repository;
         this.validacion = validaciones;
+        this.conversion = conversion;
     }
 
     obtenerTodas() {
         try {
             const datos = this.repository.obtenerTodas();
-
             let entidades = [];
 
-            for (let entidad of datos) {
-                let entidadConvertida = new this.Entidad(entidad);
-                entidades.push(entidadConvertida);
+            for (let fila of datos) {
+                let filaConvertida = this.conversion(fila);
+                let entidad = new this.Entidad(filaConvertida);
+                entidades.push(entidad);
             }
 
             return Resultado.ok(`${this.Entidad.nombre}s obtenidas`, entidades);
@@ -24,7 +25,6 @@ export default class Service {
         } catch (error) {
             return Resultado.error("Ocurrio un error al obtener las rutinas: " + error);
         }
-
     }
 
     crear(data) {
